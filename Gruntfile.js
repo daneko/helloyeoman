@@ -26,8 +26,8 @@ module.exports = function (grunt) {
         tasks: ['coffee:dist']
       },
       coffeeTest: {
-        files: ['test/spec/{,*/}*.coffee'],
-        tasks: ['coffee:test']
+        files: ['test/spec/{,*/}*.coffee','<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+        tasks: ['coffee','karma:unit']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
     },
     connect: {
       options: {
-        port: 9000,
+        port: 8000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost'
       },
@@ -102,6 +102,9 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         singleRun: true
+      },
+      e2e: {
+        configFile: 'karma-e2e.conf.js'
       }
     },
     coffee: {
@@ -120,6 +123,15 @@ module.exports = function (grunt) {
           cwd: 'test/spec',
           src: '{,*/}*.coffee',
           dest: '.tmp/spec',
+          ext: '.js'
+        }]
+      },
+      teste2e: {
+        files: [{
+          expand: true,
+          cwd: 'test/e2e',
+          src: '{,*/}*.coffee',
+          dest: '.tmp/e2e',
           ext: '.js'
         }]
       }
@@ -264,7 +276,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('server', [
     'clean:server',
-    'coffee:dist',
+    'coffee',
+    'karma:unit',
     'compass:server',
     'livereload-start',
     'connect:livereload',
@@ -277,7 +290,15 @@ module.exports = function (grunt) {
     'coffee',
     'compass',
     'connect:test',
-    'karma'
+    'karma:unit',
+  ]);
+
+  grunt.registerTask('e2e', [
+    'clean:server',
+    'coffee',
+    'compass',
+    'connect:livereload',
+    'karma:e2e',
   ]);
 
   grunt.registerTask('build', [

@@ -7,7 +7,7 @@ basePath = '';
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
-  'test/e2e/**/*.js'
+  '.tmp/e2e/**/*.js'
 ];
 
 // list of files to exclude
@@ -31,7 +31,8 @@ colors = true;
 logLevel = LOG_INFO;
 
 // enable / disable watching file and executing tests whenever any file changes
-autoWatch = false;
+// なぜかtrueにしないと動いてくれない
+autoWatch = true;
 
 // Start these browsers, currently available:
 // - Chrome
@@ -49,3 +50,12 @@ captureTimeout = 5000;
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
 singleRun = false;
+
+// @see https://github.com/karma-runner/karma/tree/master/test/e2e/angular-scenario
+// 下記のportは実際に動かすサーバと合わせる
+// Gruntfile.jsをいじらなければ9000番が割り振られている
+proxies = {
+  '/': 'http://localhost:8000/'
+};
+
+urlRoot = '/__karma/';
