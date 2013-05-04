@@ -10,10 +10,6 @@ files = [
   'test/e2e/**/*.coffee'
 ];
 
-preprocessors = {
-  'test/e2e/**/*.coffee': 'coffee'
-};
-
 // list of files to exclude
 exclude = [];
 
@@ -22,10 +18,10 @@ exclude = [];
 reporters = ['progress'];
 
 // web server port
-port = 8080;
+port = 18080;
 
 // cli runner port
-runnerPort = 9100;
+runnerPort = 19100;
 
 // enable / disable colors in the output (reporters and logs)
 colors = true;
@@ -35,8 +31,7 @@ colors = true;
 logLevel = LOG_INFO;
 
 // enable / disable watching file and executing tests whenever any file changes
-// なぜかtrueにしないと動いてくれない
-autoWatch = true;
+autoWatch = false;
 
 // Start these browsers, currently available:
 // - Chrome
