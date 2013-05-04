@@ -23,11 +23,15 @@ module.exports = function (grunt) {
     watch: {
       coffee: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-        tasks: ['coffee:dist']
+        tasks: ['coffee:dist', 'karma']
       },
       coffeeTest: {
-        files: ['test/spec/{,*/}*.coffee','<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-        tasks: ['coffee','karma:unit']
+        files: ['test/spec/{,*/}*.coffee'],
+        tasks: ['karma:unit']
+      },
+      e2eTest: {
+        files: ['test/e2e/{,*/}*.coffee'],
+        tasks: ['karma:e2e']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -104,7 +108,8 @@ module.exports = function (grunt) {
         singleRun: true
       },
       e2e: {
-        configFile: 'karma-e2e.conf.js'
+        configFile: 'karma-e2e.conf.js',
+        singleRun: true
       }
     },
     coffee: {
@@ -114,15 +119,6 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/scripts',
           src: '{,*/}*.coffee',
           dest: '.tmp/scripts',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
           ext: '.js'
         }]
       }
@@ -272,11 +268,12 @@ module.exports = function (grunt) {
     'compass:server',
     'livereload-start',
     'connect:livereload',
+    'karma:e2e',
     'open',
     'watch'
   ]);
 
-  grunt.registerTask('test', [
+  grunt.registerTask('unit', [
     'clean:server',
     'coffee',
     'compass',
@@ -290,6 +287,14 @@ module.exports = function (grunt) {
     'compass',
     'connect:livereload',
     'karma:e2e',
+  ]);
+
+  grunt.registerTask('test', [
+    'clean:server',
+    'coffee',
+    'compass',
+    'connect:livereload',
+    'karma',
   ]);
 
   grunt.registerTask('build', [

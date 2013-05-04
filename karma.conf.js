@@ -11,8 +11,8 @@ files = [
   'app/components/angular-mocks/angular-mocks.js',
   '.tmp/scripts/*.js',
   '.tmp/scripts/**/*.js',
-  '.tmp/mock/**/*.js',
-  '.tmp/spec/**/*.js'
+  'test/mock/**/*.js',
+  'test/spec/**/*.coffee'
 ];
 
 // list of files to exclude
