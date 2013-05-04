@@ -125,15 +125,6 @@ module.exports = function (grunt) {
           dest: '.tmp/spec',
           ext: '.js'
         }]
-      },
-      teste2e: {
-        files: [{
-          expand: true,
-          cwd: 'test/e2e',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/e2e',
-          ext: '.js'
-        }]
       }
     },
     compass: {

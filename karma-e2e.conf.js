@@ -7,8 +7,12 @@ basePath = '';
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
-  '.tmp/e2e/**/*.js'
+  'test/e2e/**/*.coffee'
 ];
+
+preprocessors = {
+  'test/e2e/**/*.coffee': 'coffee'
+};
 
 // list of files to exclude
 exclude = [];
